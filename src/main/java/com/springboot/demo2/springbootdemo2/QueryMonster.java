@@ -1,27 +1,17 @@
+package com.springboot.demo2.springbootdemo2;
 import com.springboot.demo2.springbootdemo2.entities.User;
 
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.boot.CommandLineRunner;
 // import org.springframework.boot.SpringApplication;
-import org.springframework.data.jpa.repository.JpaRepository;
 // import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface QueryMonster extends JpaRepository<User, Integer> {
-  User findByUserName(String username);
+  // User findByUserName(String username);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

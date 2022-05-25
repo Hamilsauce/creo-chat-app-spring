@@ -10,7 +10,7 @@ import javax.persistence.Table;
 // @AllArgsConstructor
 // @NoArgsConstructor
 @Entity
-@Table(name = "USER_TBL")
+@Table(name = "user")
 public class User {
   @Id
   private int id;
@@ -22,7 +22,13 @@ public class User {
   User() {
   }
 
-  User(int id, String username, String password, String emai, Timestamp createtime) {
+  User(int id, String username, String password, String email, Timestamp createtime) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.createtime = createtime;
+
   }
 
   public int getId() {
