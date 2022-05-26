@@ -21,6 +21,26 @@
 			}
 		],
 		"java.configuration.updateBuildConfiguration": "automatic",
-		"maven.view": "hierarchical"
+		"maven.view": "hierarchical",
+		"workbench.colorCustomizations": {
+			"activityBar.activeBackground": "#64a439",
+			"activityBar.activeBorder": "#d0dcef",
+			"activityBar.background": "#64a439",
+			"activityBar.foreground": "#15202b",
+			"activityBar.inactiveForeground": "#15202b99",
+			"activityBarBadge.background": "#d0dcef",
+			"activityBarBadge.foreground": "#15202b",
+			"sash.hoverBorder": "#64a439",
+			"statusBar.background": "#4d7e2c",
+			"statusBar.foreground": "#e7e7e7",
+			"statusBarItem.hoverBackground": "#64a439",
+			"statusBarItem.remoteBackground": "#4d7e2c",
+			"statusBarItem.remoteForeground": "#e7e7e7",
+			"titleBar.activeBackground": "#4d7e2c",
+			"titleBar.activeForeground": "#e7e7e7",
+			"titleBar.inactiveBackground": "#4d7e2c99",
+			"titleBar.inactiveForeground": "#e7e7e799"
+		},
+		"peacock.color": "#4d7e2c"
 	}
 }

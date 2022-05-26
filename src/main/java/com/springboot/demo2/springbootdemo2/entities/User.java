@@ -1,34 +1,37 @@
 package com.springboot.demo2.springbootdemo2.entities;
 
-import java.sql.Timestamp;
-
+// import java.sql.Timestamp;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 // @Data
 // @AllArgsConstructor
 // @NoArgsConstructor
+
 @Entity
 @Table(name = "user")
 public class User {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
+
   private String username;
   private String password;
   private String email;
-  private Timestamp createtime;
 
   User() {
   }
 
-  User(int id, String username, String password, String email, Timestamp createtime) {
+  public User(int id, String username, String password, String email) {
+    super();
+
     this.id = id;
     this.username = username;
     this.password = password;
     this.email = email;
-    this.createtime = createtime;
-
   }
 
   public int getId() {
@@ -36,7 +39,7 @@ public class User {
   }
 
   public void setId(int id) {
-    this.id = id;
+  this.id = id;
   }
 
   public String getUsername() {
@@ -59,15 +62,20 @@ public class User {
     return email;
   }
 
-  public void setEmail(String password) {
-    this.password = password;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
-  public Timestamp getCreatetime() {
-    return createtime;
-  }
+  // public Timestamp getCreatetime() {
+  //   return createtime;
+  // }
 
-  public void setCreatetime(Timestamp createtime) {
-    this.createtime = createtime;
+  // public void setCreatetime(Timestamp createtime) {
+  //   this.createtime = createtime;
+  // }
+
+  @Override
+  public String toString() {
+    return String.format("User [id=%s, username=%s, ]", id, username);
   }
 }
