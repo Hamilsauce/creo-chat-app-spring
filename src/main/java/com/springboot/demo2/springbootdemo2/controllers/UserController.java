@@ -1,6 +1,7 @@
 package com.springboot.demo2.springbootdemo2.controllers;
 
 import java.net.URI;
+import java.util.Optional;
 
 import com.springboot.demo2.springbootdemo2.entities.User;
 import com.springboot.demo2.springbootdemo2.services.UserService;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 public class UserController {
@@ -19,18 +21,20 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  @GetMapping("/home")
+  @GetMapping("/")
   public String welcome() {
     return "Welcome to the Remote Message Sending Receiving Consumer Software Module";
   }
 
   @GetMapping(value = "/users/{id}")
-  public User getUser(@PathVariable("id") int id) {
-    return userService.getUserByIdUser(id);
+  public Optional<User> getUser(@PathVariable("id") int id) {
+    return userService.getUserById(id);
   }
 
   @PostMapping("/users")
   public ResponseEntity<User> createUser(@RequestBody User user) {
+    // TODO: Username validation (at least just uniqueness)
+
     User savedUser = userService.saveUser(user);
 
     URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -40,32 +44,8 @@ public class UserController {
     return ResponseEntity.created(location).build();
   }
 
-  // @PostMapping(value="path")
-  // public SomeEnityData postMethodName(@RequestBody SomeEnityData entity) {
-  // //TODO: process POST request
-  // return userService.getUserByIdUser(id);
-  // return entity;
-  // }
-
-  // private UserRepository userRepository;
-
-  // @PostMapping(path="/add") // Map ONLY POST Requests
-  // public @ResponseBody String addNewUser (@RequestParam String name
-  // , @RequestParam String email) {
-  // // @ResponseBody means the returned String is the response, not a view name
-  // // @RequestParam means it is a parameter from the GET or POST request
-
-  // User n = new User();
-  // n.setName(name);
-  // n.setEmail(email);
-  // userRepository.save(n);
-  // return "Saved";
-  // }
-
-  // @GetMapping(path="/all")
-  // public @ResponseBody Iterable<User> getAllUsers() {
-  // // This returns a JSON or XML with the users
-  // return userRepository.findAll();
-  // }
-  // }
+  @GetMapping(path = "/users")
+  public @ResponseBody Iterable<User> getAllUsers() {
+    return userService.getAllUsers();
+  }
 }

@@ -1,5 +1,8 @@
 package com.springboot.demo2.springbootdemo2.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.boot.CommandLineRunner;
 
@@ -15,24 +18,26 @@ public interface UserRepository extends JpaRepository<User, Integer> {
   @Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
   public User findById(@Param("username") String username);
 
+  @Override
+  default List<User> findAll() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  // Optional<User> findByName(final String name);
+
   @Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username) and u.password = :password")
-  public User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+  public Optional<User> findByUsernameAndPassword(@Param("username") String username,
+      @Param("password") String password);
 
-  // public User setUserByIdUser(User user) {
-
-  //   User savedUser = userRepository.save(user);
-  //   return savedUser;
-  // }
 }
 
-
-
+// @Query("select count(p) = 1 from User p where name = ?1")
+// public Boolean findExistByname(String name);
 
 // public class UserRepository {
 
-
 // }
-
 
 // @Repository
 // public class UserRepository extends JpaRepository {
