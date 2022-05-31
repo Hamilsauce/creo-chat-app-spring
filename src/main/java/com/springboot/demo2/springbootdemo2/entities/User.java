@@ -1,15 +1,12 @@
 package com.springboot.demo2.springbootdemo2.entities;
 
+import javax.persistence.Column;
 // import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-// @Data
-// @AllArgsConstructor
-// @NoArgsConstructor
 
 @Entity
 @Table(name = "user")
@@ -18,9 +15,11 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
+  @Column(unique = true)
+  private String email;
+
   private String username;
   private String password;
-  private String email;
 
   User() {
   }
@@ -39,7 +38,7 @@ public class User {
   }
 
   public void setId(int id) {
-  this.id = id;
+    this.id = id;
   }
 
   public String getUsername() {
@@ -65,14 +64,6 @@ public class User {
   public void setEmail(String email) {
     this.email = email;
   }
-
-  // public Timestamp getCreatetime() {
-  //   return createtime;
-  // }
-
-  // public void setCreatetime(Timestamp createtime) {
-  //   this.createtime = createtime;
-  // }
 
   @Override
   public String toString() {

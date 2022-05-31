@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,17 +28,36 @@ public class UserController {
   }
 
   @GetMapping(value = "/users/{id}")
-  public Optional<User> getUser(@PathVariable("id") int id) {
+  public Optional<User> getUserById(@PathVariable("id") int id) {
     return userService.getUserById(id);
   }
 
+  // @GetMapping(value = "/users/{email}")
+  // public Optional<User> getUserByEmail(@PathVariable("email") int email) {
+  // return userService.getUserByEmail(email);
+  // }
+
+  @PostMapping(value = "/login")
+  public Optional<User> userLogin(@RequestBody User user) {
+    Optional<User> authResult = userService.authenticateUser(user.getEmail(), user.getPassword());
+    // .orElseThrow("User not authenticated!");
+
+    if (authResult == null) {
+
+      return null;
+    } else {
+      return authResult;
+    }
+  }
+
   @PostMapping("/users")
-  public ResponseEntity<User> createUser(@RequestBody User user) {
+  public ResponseEntity<Object> createUser(@RequestBody User user) {
     // TODO: Username validation (at least just uniqueness)
 
     User savedUser = userService.saveUser(user);
 
-    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+        .path("/{id}")
         .buildAndExpand(savedUser.getId())
         .toUri();
 
